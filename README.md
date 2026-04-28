@@ -1,6 +1,8 @@
 # Express Banking System
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/tharun242005/EXPRESS-BANKING-SYSTEM)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=https://github.com/tharun242005/EXPRESS-BANKING-SYSTEM&branch=main&name=express-banking-system)
+
+**Free tier**: 512 MB RAM, 100 GB bandwidth/month, sleeps after **1 hour** of inactivity (vs 15 min on Render)
 
 A full-stack Node.js banking application built with Express.
 
