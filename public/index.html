@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express Banking System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="theme-toggle">
+    <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+  </div>
+  <div class="container">
+    <header class="header">
+      <h1>Express Banking System</h1>
+      <p class="tagline">Modern Banking for the Digital Age</p>
+    </header>
+
+    <main class="main-content">
+      <div class="row">
+        <section class="card create-account-card">
+          <h2>Create Account</h2>
+          <form id="createForm">
+            <div class="form-group">
+              <label for="newAccNum">Account Number</label>
+              <input type="text" id="newAccNum" placeholder="Enter account number" required>
+            </div>
+            <div class="form-group">
+              <label for="newBalance">Initial Balance</label>
+              <input type="number" id="newBalance" placeholder="0" min="0" value="0">
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </form>
+          <div class="message" id="createMessage"></div>
+        </section>
+
+        <section class="card check-balance-card">
+          <h2>Check Balance</h2>
+          <form id="balanceForm">
+            <div class="form-group">
+              <label for="checkAccNum">Account Number</label>
+              <input type="text" id="checkAccNum" placeholder="Enter account number" required>
+            </div>
+            <button type="submit" class="btn btn-secondary">Get Balance</button>
+          </form>
+          <div class="balance-display" id="balanceDisplay">
+            <span class="balance-label">Balance:</span>
+            <span class="balance-value" id="balanceValue">--</span>
+          </div>
+          <div class="message" id="balanceMessage"></div>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="card transfer-card">
+          <h2>Transfer Money</h2>
+          <form id="transferForm">
+            <div class="form-group">
+              <label for="fromAcc">From Account</label>
+              <input type="text" id="fromAcc" placeholder="Sender account number" required>
+            </div>
+            <div class="form-group">
+              <label for="toAcc">To Account</label>
+              <input type="text" id="toAcc" placeholder="Receiver account number" required>
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" id="amount" placeholder="Enter amount" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-accent">Transfer</button>
+          </form>
+          <div class="message" id="transferMessage"></div>
+        </section>
+
+        <section class="card accounts-card">
+          <h2>All Accounts</h2>
+          <div class="accounts-table-container">
+            <table id="accountsTable">
+              <thead>
+                <tr>
+                  <th>Account Number</th>
+                  <th>Balance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="accountsTableBody">
+              </tbody>
+            </table>
+          </div>
+          <div class="message" id="accountsMessage"></div>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="card bst-visualizer-card">
+          <h2>BST Structure</h2>
+          <button class="btn btn-secondary" onclick="loadBSTStructure()">Show BST Structure</button>
+          <div id="bstContainer" class="viz-scroll"></div>
+          <div class="message" id="bstMessage"></div>
+        </section>
+
+        <section class="card linkedlist-visualizer-card">
+          <h2>LinkedList Traversal</h2>
+          <button class="btn btn-secondary" onclick="loadLinkedListStructure()">Show LinkedList Order</button>
+          <div id="llContainer" class="ll-scroll"></div>
+          <div class="message" id="linkedListMessage"></div>
+        </section>
+      </div>
+
+      <div class="row single">
+        <section class="card transactions-card">
+          <h2>Transactions Log</h2>
+          <p class="select-account-text" id="selectAccountText">Select an account to view transactions</p>
+          <div class="transactions-list" id="transactionsList">
+          </div>
+          <div class="message" id="transactionsMessage"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h3>Transactions</h3>
+      <div id="modalTransactions"></div>
+    </div>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
