@@ -48,7 +48,7 @@ async function loadAccounts() {
       const row = document.createElement('tr');
       row.innerHTML = `
         <td>${account.accountNumber}</td>
-        <td>$${account.balance.toFixed(2)}</td>
+        <td>$${Number(account.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
         <td>
           <button class="btn-small" onclick="viewTransactions('${account.accountNumber}')">View</button>
         </td>
@@ -103,7 +103,7 @@ balanceForm.addEventListener('submit', async (e) => {
     const result = await response.json();
 
     if (response.ok) {
-      balanceValue.textContent = `$${result.balance.toFixed(2)}`;
+      balanceValue.textContent = `$${Number(result.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
       showMessage(balanceMessage, 'Balance retrieved successfully!', true);
     } else {
       balanceValue.textContent = '--';
@@ -169,7 +169,7 @@ async function viewTransactions(accountNumber) {
           item.innerHTML = `
             <div class="transaction-type">${tx.type}</div>
             <div class="transaction-details">
-              Amount: $${tx.amount.toFixed(2)}<br>
+              Amount: $${Number(tx.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
               From: ${tx.fromAccount} → To: ${tx.toAccount}<br>
               ${new Date(tx.timestamp).toLocaleString()}
             </div>
@@ -221,7 +221,7 @@ async function loadBSTStructure() {
           let html = `<div class="tree-node">`;
           html += `<div class="tree-node-box">
             <span class="acc-num">${node.accountNumber}</span>
-            <span class="balance">$${node.balance.toFixed(2)}</span>
+             <span class="balance">$${Number(node.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
           </div>`;
           if (hasChildren) {
             html += `<div class="tree-edge"></div>`;
@@ -267,7 +267,7 @@ async function loadLinkedListStructure() {
           let html = `<div class="list-node">`;
           html += `<div class="list-node-box">
             <div>${node.accountNumber}</div>
-            <div style="font-size: 0.75rem; opacity: 0.9;">$${node.balance.toFixed(2)}</div>
+             <div style="font-size: 0.75rem; opacity: 0.9;">$${Number(node.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
           </div>`;
           html += `<span class="list-arrow">→</span>`;
           html += renderList(node.next);
