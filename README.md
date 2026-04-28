@@ -62,6 +62,8 @@ npm -v
 
 👉 Node.js v18+ recommended
 
+---
+
 ## 📥 Installation & Setup
 
 ### 1. Clone or Download the Project
