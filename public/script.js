@@ -1,4 +1,4 @@
-const API_BASE = 'https://express-banking-system.web.app/api';
+const API_BASE = 'https://express-banking-system.vercel.app/api';
 
 const createForm = document.getElementById('createForm');
 const balanceForm = document.getElementById('balanceForm');
