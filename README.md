@@ -59,6 +59,7 @@ Make sure you have installed:
 ```bash
 node -v
 npm -v
+
 👉 Node.js v18+ recommended
 
 ## 📥 Installation & Setup
