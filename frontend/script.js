@@ -1,6 +1,4 @@
-const API_BASE = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3000/api' 
-  : `${window.location.origin}/api`;
+const API_BASE = 'https://express-banking-system.web.app/api';
 
 const createForm = document.getElementById('createForm');
 const balanceForm = document.getElementById('balanceForm');

@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://express-banking-system.web.app/api';
 
 const createForm = document.getElementById('createForm');
 const balanceForm = document.getElementById('balanceForm');
