@@ -31,7 +31,7 @@ function hideLoading() {
 
 function showMessage(element, message, isSuccess) {
   element.textContent = message;
-  element.className = `message ${isSuccess ? 'success' : 'error'}`;
+  element.className = `message ?{isSuccess ? 'success' : 'error'}`;
   setTimeout(() => {
     element.className = 'message';
   }, 5000);
@@ -40,17 +40,17 @@ function showMessage(element, message, isSuccess) {
 async function loadAccounts() {
   try {
     showLoading();
-    const response = await fetch(`${API_BASE}/accounts`);
+    const response = await fetch(`?{API_BASE}/accounts`);
     const accounts = await response.json();
 
     accountsTableBody.innerHTML = '';
     accounts.forEach(account => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td>${account.accountNumber}</td>
-        <td>$${Number(account.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+        <td>?{account.accountNumber}</td>
+        <td>??{Number(account.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
         <td>
-          <button class="btn-small" onclick="viewTransactions('${account.accountNumber}')">View</button>
+          <button class="btn-small" onclick="viewTransactions('?{account.accountNumber}')">View</button>
         </td>
       `;
       accountsTableBody.appendChild(row);
@@ -70,7 +70,7 @@ createForm.addEventListener('submit', async (e) => {
   const balance = parseFloat(document.getElementById('newBalance').value) || 0;
 
   try {
-    const response = await fetch(`${API_BASE}/create`, {
+    const response = await fetch(`?{API_BASE}/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ accountNumber, balance })
@@ -79,7 +79,7 @@ createForm.addEventListener('submit', async (e) => {
     const result = await response.json();
 
     if (response.ok) {
-      showMessage(createMessage, `Account ${accountNumber} created successfully!`, true);
+      showMessage(createMessage, `Account ?{accountNumber} created successfully!`, true);
       createForm.reset();
       loadAccounts();
     } else {
@@ -99,11 +99,11 @@ balanceForm.addEventListener('submit', async (e) => {
   const accountNumber = document.getElementById('checkAccNum').value;
 
   try {
-    const response = await fetch(`${API_BASE}/balance/${accountNumber}`);
+    const response = await fetch(`?{API_BASE}/balance/?{accountNumber}`);
     const result = await response.json();
 
     if (response.ok) {
-      balanceValue.textContent = `$${Number(result.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      balanceValue.textContent = `??{Number(result.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
       showMessage(balanceMessage, 'Balance retrieved successfully!', true);
     } else {
       balanceValue.textContent = '--';
@@ -126,7 +126,7 @@ transferForm.addEventListener('submit', async (e) => {
   const amount = parseFloat(document.getElementById('amount').value);
 
   try {
-    const response = await fetch(`${API_BASE}/transfer`, {
+    const response = await fetch(`?{API_BASE}/transfer`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ from, to, amount })
@@ -153,7 +153,7 @@ async function viewTransactions(accountNumber) {
   selectAccountText.style.display = 'none';
 
   try {
-    const response = await fetch(`${API_BASE}/transactions/${accountNumber}`);
+    const response = await fetch(`?{API_BASE}/transactions/?{accountNumber}`);
     const result = await response.json();
 
     if (response.ok) {
@@ -167,11 +167,11 @@ async function viewTransactions(accountNumber) {
           const item = document.createElement('div');
           item.className = 'transaction-item';
           item.innerHTML = `
-            <div class="transaction-type">${tx.type}</div>
+            <div class="transaction-type">?{tx.type}</div>
             <div class="transaction-details">
-              Amount: $${Number(tx.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
-              From: ${tx.fromAccount} → To: ${tx.toAccount}<br>
-              ${new Date(tx.timestamp).toLocaleString()}
+              Amount: ??{Number(tx.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+              From: ?{tx.fromAccount} → To: ?{tx.toAccount}<br>
+              ?{new Date(tx.timestamp).toLocaleString()}
             </div>
           `;
           transactionsList.appendChild(item);
@@ -207,7 +207,7 @@ async function loadBSTStructure() {
   showLoading();
   const container = document.getElementById('bstContainer');
   try {
-    const response = await fetch(`${API_BASE}/bst-structure`);
+    const response = await fetch(`?{API_BASE}/bst-structure`);
     const data = await response.json();
 
     if (response.ok) {
@@ -220,17 +220,17 @@ async function loadBSTStructure() {
           const hasChildren = node.left || node.right;
           let html = `<div class="tree-node">`;
           html += `<div class="tree-node-box">
-            <span class="acc-num">${node.accountNumber}</span>
-             <span class="balance">$${Number(node.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            <span class="acc-num">?{node.accountNumber}</span>
+             <span class="balance">??{Number(node.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
           </div>`;
           if (hasChildren) {
             html += `<div class="tree-edge"></div>`;
             html += `<div class="tree-children">`;
             if (node.left) {
-              html += `<div class="tree-branch">${renderTree(node.left)}</div>`;
+              html += `<div class="tree-branch">?{renderTree(node.left)}</div>`;
             }
             if (node.right) {
-              html += `<div class="tree-branch">${renderTree(node.right)}</div>`;
+              html += `<div class="tree-branch">?{renderTree(node.right)}</div>`;
             }
             html += `</div>`;
           }
@@ -254,7 +254,7 @@ async function loadLinkedListStructure() {
   showLoading();
   const container = document.getElementById('llContainer');
   try {
-    const response = await fetch(`${API_BASE}/linkedlist-structure`);
+    const response = await fetch(`?{API_BASE}/linkedlist-structure`);
     const data = await response.json();
 
     if (response.ok) {
@@ -266,8 +266,8 @@ async function loadLinkedListStructure() {
           if (!node) return '<span class="list-null">null</span>';
           let html = `<div class="list-node">`;
           html += `<div class="list-node-box">
-            <div>${node.accountNumber}</div>
-             <div style="font-size: 0.75rem; opacity: 0.9;">$${Number(node.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+            <div>?{node.accountNumber}</div>
+             <div style="font-size: 0.75rem; opacity: 0.9;">??{Number(node.balance).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
           </div>`;
           html += `<span class="list-arrow">→</span>`;
           html += renderList(node.next);
